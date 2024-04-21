@@ -1,5 +1,16 @@
-# main
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include <string>
+#include "Quotes.h"
 
-int main () {
-  return 0;
+using namespace std;
+
+int main() {
+    Quotes quotes;
+    string filename = "quotes.csv";
+    quotes.readFile(filename);
+    quotes.startGame(quotes.categories);
+    return 0;
 }
