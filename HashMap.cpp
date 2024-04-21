@@ -29,7 +29,7 @@ void HashMap::insert(const string& key){
             break;
         }
     }
-    //if the key doesn't already exist
+    // if the key doesn't already exist
     if(!keyExists) {
         table[index].emplace_back(key, 1);
     }

@@ -24,7 +24,7 @@ private:
     const int base = 31;
 
 public:
-    HashMap(int size = 100) : table(size){}
+    HashMap(int size = 48571) : table(size){}
     int hashFunction(const string& key);
     void insert(const string& key);
     string findHighestVal();

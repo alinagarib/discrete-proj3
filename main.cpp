@@ -59,12 +59,13 @@ public:
 
     void printQuotes(){
         for (int i = 0; i < quotes.size(); i++){
-            cout << "author: " << quotes[i].author << endl;
-            cout << "quote: " << quotes[i].quote << endl;
+//            cout << "author: " << quotes[i].author << endl;
+//            cout << "quote: " << quotes[i].quote << endl;
             cout << "tags: " << quotes[i].tags << endl;
         }
     }
 
+    // removes the quotation marks from a string if it has any
     string removeQuotesFromString(const string& str){
         string result;
         for(char c : str){
@@ -75,6 +76,7 @@ public:
         return result;
     }
 
+    // removes the quotation marks from a quote object
     void removeQuotesfromQuotes(){
     for (Quote& q : quotes){
         q.quote = removeQuotesFromString(q.quote);
@@ -82,25 +84,47 @@ public:
         q.tags = removeQuotesFromString(q.tags);
     }
     }
+
+    void getFirstTag(HashMap& map){
+
+        for (int i = 0; i < quotes.size(); i++){
+
+            int position = quotes[i].tags.find(',');
+            string firstTag;
+            // if there is more than one tag
+            if (position != string::npos){
+                firstTag = quotes[i].tags.substr(0, position);
+            }
+                // if there is only one tag
+            else{
+                firstTag = quotes[i].tags;
+            }
+            map.insert(firstTag);
+        }
+    }
+
 };
 
 int main() {
     Quotes quotes;
-    string filename = "quotes_example.csv";
+    string filename = "quotes.csv";
     quotes.readFile(filename);
     quotes.removeQuotesfromQuotes();
-    quotes.printQuotes();
+    HashMap h;
+    cout << "meow" << endl;
+    quotes.getFirstTag(h);
+    //quotes.printQuotes();
 
     // testing functions for HashMap implementation
-    HashMap h;
-
 //    h.insert("love");
 //    h.insert("love");
 //    h.insert("love");
 //    h.insert("happy");
 //
-//    h.printTable();
+    //h.insert("attributed-no-source");
 
+    h.printTable();
+    cout << h.findHighestVal() << endl;
 
     return 0;
 }
