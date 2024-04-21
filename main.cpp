@@ -15,6 +15,7 @@ class Quotes {
 
     vector<Quote> quotes;
 
+
 public:
 
     void readFile(const string& filename) {
@@ -63,23 +64,43 @@ public:
             cout << "tags: " << quotes[i].tags << endl;
         }
     }
+
+    string removeQuotesFromString(const string& str){
+        string result;
+        for(char c : str){
+            if (c!= '"'){
+                result +=c;
+            }
+        }
+        return result;
+    }
+
+    void removeQuotesfromQuotes(){
+    for (Quote& q : quotes){
+        q.quote = removeQuotesFromString(q.quote);
+        q.author = removeQuotesFromString(q.author);
+        q.tags = removeQuotesFromString(q.tags);
+    }
+    }
 };
 
 int main() {
     Quotes quotes;
     string filename = "quotes_example.csv";
     quotes.readFile(filename);
-    //quotes.printQuotes();
+    quotes.removeQuotesfromQuotes();
+    quotes.printQuotes();
 
     // testing functions for HashMap implementation
     HashMap h;
 
-    h.insert("love");
-    h.insert("love");
-    h.insert("love");
-    h.insert("happy");
+//    h.insert("love");
+//    h.insert("love");
+//    h.insert("love");
+//    h.insert("happy");
+//
+//    h.printTable();
 
-    h.printTable();
 
     return 0;
 }
