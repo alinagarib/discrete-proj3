@@ -1,0 +1,64 @@
+Index: main.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#include <fstream>\r\n#include <sstream>\r\n#include <iostream>\r\n#include <vector>\r\n#include <string>\r\nusing namespace std;\r\n\r\nclass Quotes {\r\n    struct Quote {\r\n        string quote;\r\n        string author;\r\n        string tags;\r\n    };\r\n\r\n    vector<Quote> quotes;\r\n\r\npublic:\r\n\r\n    void readFile(const string& filename) {\r\n        ifstream file(filename);\r\n        if (!file.is_open()) {\r\n            cerr << \"Error: File could not be opened.\" << endl;\r\n            return; // Exit the function if file is not open\r\n        }\r\n\r\n        string line;\r\n        getline(file, line);\r\n        while (getline(file, line)) {\r\n            stringstream ss(line);\r\n            Quote entry;\r\n\r\n            // Read quote\r\n            if (ss.peek() == '\"') {\r\n                ss.get(); // Skip the opening quote\r\n                getline(ss, entry.quote, '\"'); // Read until the next quote\r\n                if (ss.peek() == ',') ss.get(); // Skip the comma after the closing quote\r\n            } else {\r\n                getline(ss, entry.quote, ',');\r\n            }\r\n\r\n            // Read author\r\n            getline(ss, entry.author, ',');\r\n\r\n            // Read categories, potentially enclosed in quotes\r\n            if (ss.peek() == '\"') {\r\n                ss.get(); // Skip the opening quote\r\n                getline(ss, entry.tags, '\"'); // Read until the next quote\r\n            } else {\r\n                getline(ss, entry.tags);\r\n            }\r\n\r\n            quotes.push_back(entry);\r\n        }\r\n\r\n        file.close();\r\n    }\r\n\r\n    void printQuotes(){\r\n        for (int i = 0; i < quotes.size(); i++){\r\n            cout << \"author: \" << quotes[i].author << endl;\r\n            cout << \"quote: \" << quotes[i].quote << endl;\r\n            cout << \"tags: \" << quotes[i].tags << endl;\r\n        }\r\n    }\r\n};\r\n\r\nint main() {\r\n    Quotes quotes;\r\n    string filename = \"quotes.csv\";\r\n    quotes.readFile(filename);\r\n    return 0;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.cpp b/main.cpp
+--- a/main.cpp	
++++ b/main.cpp	
+@@ -12,9 +12,8 @@
+         string tags;
+     };
+ 
+-    vector<Quote> quotes;
+-
+ public:
++    vector<Quote> quotes;
+ 
+     void readFile(const string& filename) {
+         ifstream file(filename);
+@@ -42,12 +41,16 @@
+             getline(ss, entry.author, ',');
+ 
+             // Read categories, potentially enclosed in quotes
++            string full_tag;
+             if (ss.peek() == '"') {
+                 ss.get(); // Skip the opening quote
+-                getline(ss, entry.tags, '"'); // Read until the next quote
++                getline(ss, full_tag, '"'); // Read until the next quote
+             } else {
+-                getline(ss, entry.tags);
++                getline(ss, full_tag);
+             }
++
++            stringstream tagStream(full_tag);
++            getline(tagStream, entry.tags, ',');
+ 
+             quotes.push_back(entry);
+         }
+@@ -68,5 +71,8 @@
+     Quotes quotes;
+     string filename = "quotes.csv";
+     quotes.readFile(filename);
++    cout << "author: " << quotes.quotes[0].author << endl;
++    cout << "quote: " << quotes.quotes[0].quote << endl;
++    cout << "tags: " << quotes.quotes[0].tags << endl;
+     return 0;
+ }
+Index: Quotes.h
+===================================================================
+diff --git a/Quotes.h b/Quotes.h
+new file mode 100644
+--- /dev/null	
++++ b/Quotes.h	
+@@ -0,0 +1,8 @@
++//
++// Created by alina on 4/18/2024.
++//
++
++#ifndef DISCRETE_PROJ3_QUOTES_H
++#define DISCRETE_PROJ3_QUOTES_H
++
++#endif //DISCRETE_PROJ3_QUOTES_H
