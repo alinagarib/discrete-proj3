@@ -70,7 +70,9 @@ int main() {
     string filename = "quotes.csv";
     quotes.readFile(filename);
 
-    RedBlackTree meow;
-    meow.insert()
+    quotes.printQuotes();
+
+//    RedBlackTree meow;
+//    meow.insert();
     return 0;
 }

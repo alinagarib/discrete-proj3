@@ -23,7 +23,7 @@ public:
     TreeNode* right;
     TreeNode* parent;
 
-    TreeNode(string& key, int& value) : key(""), value(0),left(nullptr), right(nullptr), parent(nullptr), color(RED){
+    TreeNode(string& key) : key(""), value(0),left(nullptr), right(nullptr), parent(nullptr), color(RED){
         this->key = key;
         this->value = value;
     }
@@ -34,14 +34,18 @@ public:
 class RedBlackTree {
 private:
     TreeNode* root;
-    TreeNode* insertHelper(TreeNode* root, string& key, int& name);
-    vector<TreeNode> findGreastFrequenciesHelper();
+    TreeNode* insertHelper(TreeNode* node, string& key);
+    vector<TreeNode> findGreatestFrequenciesHelper();
+    void rotateLeft(TreeNode* node);
+    void rotateRight(TreeNode* node);
 
 
 public:
     RedBlackTree() : root(nullptr){};
-    void insert(string& key, int& value);
-    vector<TreeNode> findGreastFrequencies();
+    void insert(string& key);
+    void fixTree(TreeNode* node);
+    vector<TreeNode> findGreatestFrequencies();
+
 };
 
 
