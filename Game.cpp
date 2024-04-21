@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <iomanip>
 #include <utility>
 #include <random>
 #include <stdexcept>
@@ -12,7 +11,7 @@
 using namespace std;
 
 
-gameQuote::gameQuote() {
+Game::Game() {
     original = "";
     mod = "";
     category = "";
@@ -20,12 +19,12 @@ gameQuote::gameQuote() {
     attempts = 10;
 }
 
-gameQuote::gameQuote(map<string, vector<pair<string, string>>>& categories){
+Game::Game(map<string, vector<pair<string, string>>>& categories){
     this->categories = categories;
     this->attempts = 10;
 }
 
-void gameQuote::getCategory() {
+void Game::getCategory() {
     cout << "Enter an integer to select your category: " << endl;
     int count = 1;
     for (auto iter = categories.begin(); iter != categories.end(); iter++){
@@ -55,7 +54,7 @@ void gameQuote::getCategory() {
     }
 }
 
-void gameQuote::printWelcomeBoard() {
+void Game::printWelcomeBoard() {
     cout << "WHEEL OF QUOTES" << endl;
     cout << "Rules: \n"
             "1. You will choose a category for the quote\n"
@@ -75,7 +74,7 @@ void gameQuote::printWelcomeBoard() {
     }
 }
 
-void gameQuote::printGameBoard() {
+void Game::printGameBoard() {
     //checks if the player has run out of attempts
     if (attempts == 0){
         cout << "Game over! Out of attempts :(" << endl;
@@ -93,7 +92,7 @@ void gameQuote::printGameBoard() {
     }
 }
 
-void gameQuote::toggleGameBoard() {
+void Game::toggleGameBoard() {
     //prompts user to guess a letter or the full quote
     cout << endl << "Enter a letter or \"!\" to guess the full quote: " << endl;
     string in;
@@ -154,7 +153,7 @@ void gameQuote::toggleGameBoard() {
     }
 }
 
-void gameQuote::editMod(char input){ //if the inputted char is missing, edit the mod string
+void Game::editMod(char input){ //if the inputted char is missing, edit the mod string
     for(int i = 0; i < original.length(); i++){
         for (int j = 0; j < mod.length(); j++){
             if (original[i] == input){
@@ -164,7 +163,7 @@ void gameQuote::editMod(char input){ //if the inputted char is missing, edit the
     }
 }
 
-void gameQuote::popString() {
+void Game::popString() {
     //populate the letters set with all unique letters in the quote
     for (int i = 0; i < original.length(); i++){
         if(isalpha(original[i])) {
@@ -200,7 +199,7 @@ void gameQuote::popString() {
 }
 
 
-void gameQuote::isGameOver(string& guess) {
+void Game::isGameOver(string& guess) {
     cout << endl;
     //check if the guess quote is equal to the original, indicating win condition
     if (filter(guess) == filter(original)) {
@@ -213,7 +212,7 @@ void gameQuote::isGameOver(string& guess) {
     }
 }
 
-string gameQuote::getQuote(string& category) {
+string Game::getQuote(string& category) {
     //checks if categories map is empty
     if (categories.empty()) {
         throw runtime_error("The map is empty.");
@@ -241,19 +240,19 @@ string gameQuote::getQuote(string& category) {
 }
 
 
-int gameQuote::getAttempts() {
+int Game::getAttempts() {
     return attempts;
 }
 
-void gameQuote::restart() {
+void Game::restart() {
     cout << R"(Enter "1" to restart, or "2" to quit.)" << endl;
     string input;
     getline(cin, input);
 
     //if user wishes to restart, create new game object
     if (input == "1"){
-        gameQuote gameQuote1(categories);
-        gameQuote1.printWelcomeBoard();
+        Game Game1(categories);
+        Game1.printWelcomeBoard();
     } else if (input == "2"){
         return;
     } else {
@@ -261,7 +260,7 @@ void gameQuote::restart() {
     }
 }
 
-string gameQuote::filter(string& str) {
+string Game::filter(string& str) {
 
     //filter the string so only compares entered chars and order so spaces and punctuation are not relevant
     string filtered;

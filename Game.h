@@ -8,8 +8,8 @@
 #pragma once
 using namespace std;
 
-//maybe just make a class for popped string
-class gameQuote {
+
+class Game {
 public:
     string original;
     string mod;
@@ -21,8 +21,8 @@ public:
     int attempts;
     map<string, vector<pair<string, string>>> categories;
 
-    gameQuote();
-    gameQuote(map<string, vector<pair<string, string>>>& categories);
+    Game();
+    explicit Game(map<string, vector<pair<string, string>>>& categories);
     void printWelcomeBoard();
 
 private:
@@ -36,7 +36,6 @@ private:
     int getAttempts();
     string filter(string& str);
     void editMod(char input);
-
 };
 
 
