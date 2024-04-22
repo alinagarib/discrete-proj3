@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <queue>
 using namespace std;
 
 //Learned what enum was while trying to search of a way to code color in a readable manner on stack overflow

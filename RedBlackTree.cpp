@@ -158,3 +158,34 @@ void RedBlackTree::rotateRight(TreeNode* node) {
     leftChild->right = node;
     node->parent = leftChild;
 }
+
+void RedBlackTree::printPreorder(TreeNode* node) {
+    //Preorder traversal taken from my AVL project and modified
+    if(node == nullptr)
+        cout << "";
+    else{
+        if(node->parent != nullptr)
+            cout<< "Node: " << node->key << " Color: " << node->color << " Frequency: " << node->value << " Parent: " << node->parent->key << endl;
+        else
+            cout<< "Node: " << node->key << " Color: " << node->color << " Frequency: " << node->value << " Parent: NULL" << endl;
+
+        printPreorder(node->left);
+        printPreorder(node->right);
+    }
+}
+
+void AVLTree::printInorder(TreeNode* node,  int& traversalCounter) {
+    if(node == nullptr)
+        cout << "";
+    else{
+        //Standard inorder traversal
+        printInorder(node->left, traversalCounter);
+        //Traversal counter is used to know when its the last value to be printed, so no comma is at the end
+        traversalCounter++;
+        if(nodeCount != traversalCounter)
+            cout << node->name << ", ";
+        else
+            cout << node->name;
+        printInorder(node->right, traversalCounter);
+    }
+}
