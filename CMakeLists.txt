@@ -10,4 +10,7 @@ add_executable(discrete_proj3
         Quotes.cpp
         Quotes.h
         Game.h
-        Game.cpp)
+        Game.cpp
+        RedBlackTree.h
+        RedBlackTree.cpp
+        HashMap.h)
