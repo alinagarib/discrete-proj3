@@ -123,10 +123,11 @@ int main() {
 
     RedBlackTree h;
     quotes.getFirstTagTree(h);
-
+    h.findGreatestFrequencies(h.getRoot());
+    h.printGreatestFrequencies();
     auto end = chrono::steady_clock::now();
 
-//    cout << h.findHighestVal() << endl;
+
 
     auto difference = end-start;
 

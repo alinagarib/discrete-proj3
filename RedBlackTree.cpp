@@ -106,12 +106,11 @@ void RedBlackTree::fixTree(TreeNode* node) {
 
 }
 
-vector<TreeNode> RedBlackTree::findGreatestFrequencies() {
-    return vector<TreeNode>();
-}
-
-vector<TreeNode> RedBlackTree::findGreatestFrequenciesHelper() {
-    return vector<TreeNode>();
+void RedBlackTree::printGreatestFrequencies() {
+    while (!minHeap.empty()) {
+        cout << "Frequency: " << minHeap.top()->value << ", Key: " << minHeap.top()->key << endl;
+        minHeap.pop();
+    }
 }
 
 void RedBlackTree::rotateLeft(TreeNode* node) {
@@ -174,18 +173,23 @@ void RedBlackTree::printPreorder(TreeNode* node) {
     }
 }
 
-void AVLTree::printInorder(TreeNode* node,  int& traversalCounter) {
+void RedBlackTree::findGreatestFrequencies(TreeNode *node) {
     if(node == nullptr)
         cout << "";
     else{
-        //Standard inorder traversal
-        printInorder(node->left, traversalCounter);
-        //Traversal counter is used to know when its the last value to be printed, so no comma is at the end
-        traversalCounter++;
-        if(nodeCount != traversalCounter)
-            cout << node->name << ", ";
-        else
-            cout << node->name;
-        printInorder(node->right, traversalCounter);
+        findGreatestFrequencies(node->left);
+
+        if (minHeap.size() < 10) {
+            minHeap.push(node);
+        } else if (node->value > minHeap.top()->value) {
+            minHeap.pop();
+            minHeap.push(node);
+        }
+
+        findGreatestFrequencies(node->right);
     }
+}
+
+TreeNode *RedBlackTree::getRoot() {
+    return root;
 }

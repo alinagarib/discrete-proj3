@@ -15,6 +15,7 @@ enum Color {RED, BLACK};
 
 
 
+
 class TreeNode{
 public:
     string key;
@@ -29,24 +30,34 @@ public:
     }
 
 };
-
+class nodeComparator
+{
+public:
+    bool operator() (const TreeNode* a, const TreeNode* b)
+    {
+        return a->value > b->value;
+    }
+};
 
 class RedBlackTree {
-public:
+private:
     TreeNode* root;
     TreeNode* insertHelper(TreeNode* root, TreeNode* node);
-    vector<TreeNode> findGreatestFrequenciesHelper();
     void rotateLeft(TreeNode* node);
     void rotateRight(TreeNode* node);
+    priority_queue<TreeNode*, vector<TreeNode*>, nodeComparator > minHeap;
 
-
+public:
     RedBlackTree() : root(nullptr){};
     void insert(string key);
     void fixTree(TreeNode* node);
     void printPreorder(TreeNode* node);
-    vector<TreeNode> findGreatestFrequencies();
+    void findGreatestFrequencies(TreeNode* node);
+    void printGreatestFrequencies();
+    TreeNode* getRoot();
 
 };
+
 
 
 #endif //DISCRETE_PROJ3_REDBLACKTREE_H
