@@ -65,6 +65,6 @@ void Quotes::startGame(map<string, vector<pair<string, string>>> &categories) {
     //set default map values for now
     categories[quotes[0].tags].push_back({quotes[0].quote, quotes[0].author});
     categories[quotes[1].tags].push_back({quotes[1].quote, quotes[1].author});
-    gameQuote game(categories);
+    Game game(categories);
     game.printWelcomeBoard();
 }
