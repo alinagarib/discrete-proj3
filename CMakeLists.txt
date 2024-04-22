@@ -12,4 +12,6 @@ add_executable(discrete_proj3
         Game.h
         Game.cpp
         HashMap.h
-        HashMap.cpp)
+        HashMap.cpp
+        RedBlackTree.h
+        RedBlackTree.cpp)

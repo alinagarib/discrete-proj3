@@ -55,15 +55,19 @@ void Game::getCategory() {
 }
 
 void Game::printWelcomeBoard() {
-    cout << "WHEEL OF QUOTES" << endl;
-    cout << "Rules: \n"
+    string input;
+    cout << "\nOptions: \n"
+            "1. View our Structural Sponsors!\n"
+            "2. Begin Playing\n" << endl;
+    getline(cin, input);
+    cout << "\nRules: \n"
             "1. You will choose a category for the quote\n"
             "2. You will be presented with a quote and the author as a hint\n"
             "3. You will enter a character to reveal from the quote, each input is one attempt\n"
             "4. You have ten attempts to enter the entire string before you reveal all the missing characters\n"
+            "5. Vowels cost two attempts\n"
             << endl;
     cout << "Enter START to play!" << endl;
-    string input;
     getline(cin, input);
     cout << endl;
     if(input == "START" || input == "start"){
@@ -76,7 +80,7 @@ void Game::printWelcomeBoard() {
 
 void Game::printGameBoard() {
     //checks if the player has run out of attempts
-    if (attempts == 0){
+    if (attempts <= 0){
         cout << "Game over! Out of attempts :(" << endl;
         restart();
     } else { //otherwise print current stats
@@ -113,7 +117,7 @@ void Game::toggleGameBoard() {
         //checks if input is valid
         if (!isalpha(input)){
             cout << "Invalid input! Try again." << endl;
-            printGameBoard();
+            toggleGameBoard();
         }
         //standardizes input to uppercase
         input = toupper(in[0]);
@@ -121,7 +125,7 @@ void Game::toggleGameBoard() {
         auto it = letters_guessed.find(input);
         if (it != letters_guessed.end()) {
             cout << "Letter already guessed. Try again!" << endl;
-            printGameBoard();
+            toggleGameBoard();
         }
 
         auto iter = not_popped.find(input);
@@ -133,7 +137,13 @@ void Game::toggleGameBoard() {
         //otherwise, decrement attempts and check if the letter
         //is a valid guess or if the whole string has been revealed
         //without an attempt of guessing the whole string
-        attempts--;
+
+        if (isVowel(input)){
+            attempts = attempts-2;
+        } else {
+            attempts--;
+        }
+
         auto i = letters.find(input);
         if (i == letters.end()) {
             cout << "Wrong! Try again." << endl;
@@ -273,4 +283,10 @@ string Game::filter(string& str) {
     return filtered;
 }
 
-
+bool Game::isVowel(char input){
+    if (input == 'A' || input == 'E' || input == 'I'|| input == 'O' || input == 'U'){
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -36,6 +36,7 @@ private:
     int getAttempts();
     string filter(string& str);
     void editMod(char input);
+    bool isVowel(char input);
 };
 
 

@@ -9,6 +9,9 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "HashMap.h"
+#include "RedBlackTree.h"
+
 #pragma once
 using namespace std;
 
@@ -29,5 +32,9 @@ public:
     void printQuotes();
     void startGame(map<string, vector<pair<string, string>>>& categories); //that calls printWelcomeBoard
     //function to use the data structures and sort the quotes into categories
+    void removeQuotesfromQuotes();
+    void getFirstTagHashmap(HashMap &map);
+
+    void getFirstTagTree(RedBlackTree& map);
 };
 
