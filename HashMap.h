@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <queue>
 
 using namespace std;
 
@@ -18,17 +19,29 @@ struct Node{
     Node(const string& k, int f) : key(k), frequency(f){}
 };
 
+//used to build minHeap for finding the top 10 keys
+struct hashComparator
+{
+    bool operator() (const Node& a, const Node& b){
+        return a.frequency > b.frequency;
+    }
+};
+
 class HashMap{
 private:
     vector<list<Node>> table;
     const int base = 31;
+    int hashFunction(const string& key);
+    priority_queue<Node, vector<Node>, hashComparator> minHeap;
 
 public:
+
     HashMap(int size = 48571) : table(size){}
-    int hashFunction(const string& key);
     void insert(const string& key);
     string findHighestVal();
     void printTable();
+    void findGreatestFrequenciesHash();
 };
+
 
 #endif //DISCRETE_PROJ3_HASHMAP_H

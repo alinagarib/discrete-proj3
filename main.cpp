@@ -1,4 +1,5 @@
 #include <fstream>
+#include <chrono>
 #include <sstream>
 #include <iostream>
 #include <vector>
@@ -26,30 +27,17 @@ public:
         }
 
         string line;
+
+        //ignoring the first line
         getline(file, line);
-        while (getline(file, line)) {
-            stringstream ss(line);
+
+        while(getline(file, line)){
+            istringstream ss(line);
             Quote entry;
 
-            // Read quote
-            if (ss.peek() == '"') {
-                ss.get(); // Skip the opening quote
-                getline(ss, entry.quote, '"'); // Read until the next quote
-                if (ss.peek() == ',') ss.get(); // Skip the comma after the closing quote
-            } else {
-                getline(ss, entry.quote, ',');
-            }
-
-            // Read author
-            getline(ss, entry.author, ',');
-
-            // Read categories, potentially enclosed in quotes
-            if (ss.peek() == '"') {
-                ss.get(); // Skip the opening quote
-                getline(ss, entry.tags, '"'); // Read until the next quote
-            } else {
-                getline(ss, entry.tags);
-            }
+            getline(ss, entry.quote, '\t');
+            getline(ss, entry.author, '\t');
+            getline(ss, entry.tags, '\t');
 
             quotes.push_back(entry);
         }
@@ -59,8 +47,8 @@ public:
 
     void printQuotes(){
         for (int i = 0; i < quotes.size(); i++){
-//            cout << "author: " << quotes[i].author << endl;
-//            cout << "quote: " << quotes[i].quote << endl;
+            cout << "author: " << quotes[i].author << endl;
+            cout << "quote: " << quotes[i].quote << endl;
             cout << "tags: " << quotes[i].tags << endl;
         }
     }
@@ -85,6 +73,7 @@ public:
     }
     }
 
+    //gets the first tag in each list of tags for each quote object
     void getFirstTag(HashMap& map){
 
         for (int i = 0; i < quotes.size(); i++){
@@ -107,24 +96,26 @@ public:
 
 int main() {
     Quotes quotes;
-    string filename = "quotes.csv";
+    string filename = "quotes.txt";
     quotes.readFile(filename);
     quotes.removeQuotesfromQuotes();
+
+    //timing how long it takes to insert all the data into the hashmap
+    auto start = chrono::steady_clock::now();
+
     HashMap h;
-    cout << "meow" << endl;
     quotes.getFirstTag(h);
-    //quotes.printQuotes();
 
-    // testing functions for HashMap implementation
-//    h.insert("love");
-//    h.insert("love");
-//    h.insert("love");
-//    h.insert("happy");
-//
-    //h.insert("attributed-no-source");
+    auto end = chrono::steady_clock::now();
 
-    h.printTable();
     cout << h.findHighestVal() << endl;
+
+    auto difference = end-start;
+
+    //h.printTable();
+    h.findGreatestFrequenciesHash();
+
+    cout << "Time taken to build hashmap: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
 
     return 0;
 }
