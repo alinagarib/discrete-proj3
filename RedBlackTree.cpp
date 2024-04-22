@@ -107,6 +107,7 @@ void RedBlackTree::fixTree(TreeNode* node) {
 }
 
 void RedBlackTree::printGreatestFrequencies() {
+    //Prints the contents of the minHeap with greatest frequencies
     while (!minHeap.empty()) {
         cout << "Frequency: " << minHeap.top()->value << ", Key: " << minHeap.top()->key << endl;
         minHeap.pop();
@@ -174,11 +175,14 @@ void RedBlackTree::printPreorder(TreeNode* node) {
 }
 
 void RedBlackTree::findGreatestFrequencies(TreeNode *node) {
+
+    //Does an inorder traversal of the whole tree
     if(node == nullptr)
         cout << "";
     else{
         findGreatestFrequencies(node->left);
 
+        //Logic behind keeping the K largest elements in the whole tree
         if (minHeap.size() < 10) {
             minHeap.push(node);
         } else if (node->value > minHeap.top()->value) {
