@@ -30,6 +30,7 @@ struct hashComparator
 class HashMap{
 private:
     vector<list<Node>> table;
+    vector<pair<string, int>> topTen;
     const int base = 31;
     int hashFunction(const string& key);
     priority_queue<Node, vector<Node>, hashComparator> minHeap;
@@ -40,6 +41,7 @@ public:
     void insert(const string& key);
     void printTable();
     void findGreatestFrequenciesHash();
+    void printGreatestFrequenciesHash();
 };
 
 

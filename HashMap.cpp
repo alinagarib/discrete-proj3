@@ -63,7 +63,6 @@ void HashMap::findGreatestFrequenciesHash(){
         }
 
         //puts the top ten keys into a vector
-        vector<pair<string, int>> topTen;
         while(!minHeap.empty()){
             pair<string, int> p;
             p.first = minHeap.top().key;
@@ -71,9 +70,12 @@ void HashMap::findGreatestFrequenciesHash(){
             topTen.push_back(p);
             minHeap.pop();
         }
-        //prints the top ten keys with the highest frequencies
-//        for(auto& pair : topTen){
-//            cout << pair.first << " " << pair.second << endl;
-//        }
+    }
+}
+
+void HashMap::printGreatestFrequenciesHash() {
+
+    for(auto& pair : topTen){
+        cout << "Frequency: " <<  pair.second << ", Key: " << pair.first << endl;
     }
 }

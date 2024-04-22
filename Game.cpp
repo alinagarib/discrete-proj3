@@ -7,6 +7,7 @@
 #include <set>
 #include <cctype>
 #include <algorithm>
+#include <chrono>
 #include "Game.h"
 using namespace std;
 
@@ -55,11 +56,7 @@ void Game::getCategory() {
 }
 
 void Game::printWelcomeBoard() {
-    string input;
-    cout << "\nOptions: \n"
-            "1. View our Structural Sponsors!\n"
-            "2. Begin Playing\n" << endl;
-    getline(cin, input);
+    cout << "\n********* WHEEL OF QUOTES *********\n" << endl;
     cout << "\nRules: \n"
             "1. You will choose a category for the quote\n"
             "2. You will be presented with a quote and the author as a hint\n"
@@ -68,6 +65,7 @@ void Game::printWelcomeBoard() {
             "5. Vowels cost two attempts\n"
             << endl;
     cout << "Enter START to play!" << endl;
+    string input;
     getline(cin, input);
     cout << endl;
     if(input == "START" || input == "start"){
@@ -228,8 +226,7 @@ string Game::getQuote(string& category) {
         throw runtime_error("The map is empty.");
     }
 
-    random_device rd;
-    mt19937 gen(rd());
+    mt19937 rng_mt(time(nullptr));
 
     //select a random pair from the vector at this key
     const auto& pairs = categories.at(category);
@@ -237,7 +234,7 @@ string Game::getQuote(string& category) {
         throw runtime_error("The vector for the selected key is empty.");
     }
     uniform_int_distribution<> current(0, pairs.size() - 1);
-    const auto& random_pair = pairs[current(gen)];
+    const auto& random_pair = pairs[current(rng_mt)];
 
     string quote = random_pair.first;
 

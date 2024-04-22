@@ -106,66 +106,93 @@ void Quotes::getFirstTagTree(RedBlackTree& map){
     }
 }
 
-void Quotes::startGame(map<string, vector<pair<string, string>>> &categories) {
-    //set default map values for now
+void Quotes::startGame() {
+    string input;
+    cout << "\n********* WHEEL OF QUOTES *********\n\n"
+            "Would you like to: \n"
+            "1. View our structural sponsors!\n"
+            "2. Begin Playing\n"
+            "3. Quit\n"
+            "Enter an integer corresponding to your choice" << endl;
+    getline(cin, input);
+    if (input == "1"){
+        //set default map values for now
 
-    cout << "********* WHEEL OF QUOTES *********" << endl;
+        cout << "\n********* STRUCTURAL SPONSORS *********\n" << endl;
 
-    auto start = chrono::steady_clock::now();
+        auto start = chrono::steady_clock::now();
 
-    HashMap h;
-    getFirstTagHashmap(h);
+        HashMap h;
+        getFirstTagHashmap(h);
 
-    auto end = chrono::steady_clock::now();
+        auto end = chrono::steady_clock::now();
 
-    auto difference = end-start;
+        auto difference = end-start;
 
-    cout << "Time taken to build hashmap: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
+        cout << "Time taken to build hashmap: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
 
-    start = chrono::steady_clock::now();
+        start = chrono::steady_clock::now();
 
-    RedBlackTree tree;
-    getFirstTagTree(tree);
+        RedBlackTree tree;
+        getFirstTagTree(tree);
 
-    end = chrono::steady_clock::now();
+        end = chrono::steady_clock::now();
 
-    difference = end-start;
+        difference = end-start;
 
-    cout << "Time taken to build red black tree: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
-
-
-    start = chrono::steady_clock::now();
-
-    h.findGreatestFrequenciesHash();
-
-
-    end = chrono::steady_clock::now();
-
-    difference = end-start;
-
-    cout << "Time taken to find Top 10 most frequent tags in hashmap: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
-
-    start = chrono::steady_clock::now();
-
-    tree.findGreatestFrequencies(tree.getRoot());
-
-    end = chrono::steady_clock::now();
-
-    difference = end-start;
-
-    vector<string> finalTenTags = tree.returnGreatestFrequencies();
-
-    unordered_set<string> finalTags(finalTenTags.begin(), finalTenTags.end());
+        cout << "Time taken to build red black tree: " << chrono::duration<double, milli>(difference).count() << " ms" << endl << endl;
 
 
-    cout << "Time taken to find Top 10 most frequent tags in red black tree: " << chrono::duration<double, milli>(difference).count() << " ms" << endl;
+        start = chrono::steady_clock::now();
 
-    for(auto iter = quotes.begin(); iter != quotes.end(); ++iter){
-        if (finalTags.find(iter->tags) != finalTags.end()) {
-            categories[iter->tags].emplace_back(iter->quote, iter->author);
+        h.findGreatestFrequenciesHash();
+
+
+        end = chrono::steady_clock::now();
+
+        difference = end-start;
+
+        h.printGreatestFrequenciesHash();
+
+        cout << "Time taken to find Top 10 most frequent tags in hashmap: " << chrono::duration<double, milli>(difference).count() << " ms" << endl << endl;
+
+        start = chrono::steady_clock::now();
+
+        tree.findGreatestFrequencies(tree.getRoot());
+
+        end = chrono::steady_clock::now();
+
+        difference = end-start;
+
+        tree.printGreatestFrequencies();
+
+        cout << "Time taken to find Top 10 most frequent tags in red black tree: " << chrono::duration<double, milli>(difference).count() << " ms" << endl << endl;
+
+        startGame();
+
+    } else if(input == "2"){
+        HashMap h;
+        getFirstTagHashmap(h);
+        RedBlackTree tree;
+        getFirstTagTree(tree);
+        h.findGreatestFrequenciesHash();
+        tree.findGreatestFrequencies(tree.getRoot());
+        vector<string> finalTenTags = tree.returnGreatestFrequencies();
+
+        unordered_set<string> finalTags(finalTenTags.begin(), finalTenTags.end());
+
+        for(auto iter = quotes.begin(); iter != quotes.end(); ++iter){
+            if (finalTags.find(iter->tags) != finalTags.end()) {
+                categories[iter->tags].emplace_back(iter->quote, iter->author);
+            }
         }
+        Game game(categories);
+        game.printWelcomeBoard();
+    } else if (input == "3"){
+        cout << "thanks anyway... >_<" << endl;
+        return;
+    } else {
+        cout << "invalid input :( try again" << endl;
+        startGame();
     }
-
-    Game game(categories);
-    game.printWelcomeBoard();
 }

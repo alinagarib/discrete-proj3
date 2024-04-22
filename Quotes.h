@@ -30,7 +30,7 @@ public:
     Quotes();
     void readFile(const string& filename);
     void printQuotes();
-    void startGame(map<string, vector<pair<string, string>>>& categories); //that calls printWelcomeBoard
+    void startGame(); //that calls printWelcomeBoard
     //function to use the data structures and sort the quotes into categories
     void removeQuotesfromQuotes();
     void getFirstTagHashmap(HashMap &map);
