@@ -18,11 +18,13 @@ Game::Game() {
     category = "";
     author = "";
     attempts = 10;
+    game_over = false;
 }
 
 Game::Game(map<string, vector<pair<string, string>>>& categories){
     this->categories = categories;
     this->attempts = 10;
+    this->game_over = false;
 }
 
 void Game::getCategory() {
@@ -80,6 +82,7 @@ void Game::printGameBoard() {
     //checks if the player has run out of attempts
     if (attempts <= 0){
         cout << "Game over! Out of attempts :(" << endl;
+        cout << "ANSWER: \n" << original << endl << endl;
         restart();
     } else { //otherwise print current stats
         cout << endl << mod << endl << "Author: " << author << endl;
@@ -106,7 +109,7 @@ void Game::toggleGameBoard() {
     //user input does not have to have accurate punctuation/spacing
     if (input == '!'){
         attempts--;
-        cout << "Enter the whole quote including accurate punctuation: " << endl;
+        cout << "Enter the whole quote: " << endl;
         string guess;
         getline(cin, guess);
         transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
@@ -129,39 +132,43 @@ void Game::toggleGameBoard() {
         auto iter = not_popped.find(input);
         if (iter != not_popped.end()) {
             cout << "Letter already in the quote. Try again!" << endl;
-            printGameBoard();
+            toggleGameBoard();
         }
 
         //otherwise, decrement attempts and check if the letter
         //is a valid guess or if the whole string has been revealed
         //without an attempt of guessing the whole string
 
-        if (isVowel(input)){
-            attempts = attempts-2;
-        } else {
-            attempts--;
-        }
-
-        auto i = letters.find(input);
-        if (i == letters.end()) {
-            cout << "Wrong! Try again." << endl;
-            printGameBoard();
-
-        } else {
-            letters_guessed.insert(input);
-            editMod(input);
-
-            if (filter(mod) == filter(original)){
-                cout << "Game over :( You never guessed the quote!" << endl;
-                restart();
+        if (!game_over) {
+            if (isVowel(input)) {
+                attempts = attempts - 2;
+            } else {
+                attempts--;
             }
 
-            printGameBoard();
+            auto i = letters.find(input);
+            if (i == letters.end()) {
+                cout << "Wrong! Try again." << endl;
+                printGameBoard();
+
+            } else {
+                letters_guessed.insert(input);
+                editMod(input);
+
+                if (filter(mod) == filter(original)) {
+                    cout << "Game over :( You never guessed the quote!" << endl;
+                    cout << "ANSWER: \n" << original << endl << endl;
+                    restart();
+                }
+
+                printGameBoard();
+            }
         }
     }
 }
 
-void Game::editMod(char input){ //if the inputted char is missing, edit the mod string
+void Game::editMod(char input){
+    //if the inputted char is missing, edit the mod string
     for(int i = 0; i < original.length(); i++){
         for (int j = 0; j < mod.length(); j++){
             if (original[i] == input){
@@ -261,6 +268,7 @@ void Game::restart() {
         Game Game1(categories);
         Game1.printWelcomeBoard();
     } else if (input == "2"){
+        game_over = true;
         return;
     } else {
         cout << "Invalid input! Try again" << endl;
@@ -281,6 +289,7 @@ string Game::filter(string& str) {
 }
 
 bool Game::isVowel(char input){
+    //checks if user input a vowel
     if (input == 'A' || input == 'E' || input == 'I'|| input == 'O' || input == 'U'){
         return true;
     } else {

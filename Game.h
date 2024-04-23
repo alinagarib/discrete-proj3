@@ -19,6 +19,7 @@ public:
     set<char> not_popped;
     set<char> letters_guessed;
     int attempts;
+    bool game_over;
     map<string, vector<pair<string, string>>> categories;
 
     Game();

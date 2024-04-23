@@ -184,6 +184,7 @@ void Quotes::startGame() {
         for(auto iter = quotes.begin(); iter != quotes.end(); ++iter){
             if (finalTags.find(iter->tags) != finalTags.end()) {
                 categories[iter->tags].emplace_back(iter->quote, iter->author);
+//                cout << iter->tags << endl;
             }
         }
         Game game(categories);
