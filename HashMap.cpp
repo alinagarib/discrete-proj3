@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// custom hash function to get indexing for placing the keys in the hashmap
+// heavily influenced by: https://dev.to/muiz6/string-hashing-in-c-1np3
 int HashMap::hashFunction(const string& key){
     int hash = 0;
 

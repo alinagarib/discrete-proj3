@@ -116,8 +116,9 @@ void Quotes::startGame() {
             "Enter an integer corresponding to your choice" << endl;
     getline(cin, input);
     if (input == "1"){
-        //set default map values for now
 
+        // prints top 10 most frequent tags from both RB tree and hashmap
+        // prints the amount of time it took to build each data structure using chrono
         cout << "\n********* STRUCTURAL SPONSORS *********\n" << endl;
 
         auto start = chrono::steady_clock::now();
@@ -171,6 +172,7 @@ void Quotes::startGame() {
         startGame();
 
     } else if(input == "2"){
+        // values for the top 10 most frequent tags are still generated so the user can choose from them to start the game
         HashMap h;
         getFirstTagHashmap(h);
         RedBlackTree tree;
@@ -184,10 +186,11 @@ void Quotes::startGame() {
         for(auto iter = quotes.begin(); iter != quotes.end(); ++iter){
             if (finalTags.find(iter->tags) != finalTags.end()) {
                 categories[iter->tags].emplace_back(iter->quote, iter->author);
-//                cout << iter->tags << endl;
             }
         }
         Game game(categories);
+
+        //starts the game
         game.printWelcomeBoard();
     } else if (input == "3"){
         cout << "thanks anyway... >_<" << endl;

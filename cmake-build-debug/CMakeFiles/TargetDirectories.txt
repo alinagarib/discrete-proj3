@@ -1,3 +1,3 @@
-C:/Users/alina/CLionProjects/discrete-proj3/cmake-build-debug/CMakeFiles/discrete_proj3.dir
-C:/Users/alina/CLionProjects/discrete-proj3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/alina/CLionProjects/discrete-proj3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/jakeb/CLionProjects/finalproduct/cmake-build-debug/CMakeFiles/discrete_proj3.dir
+C:/Users/jakeb/CLionProjects/finalproduct/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/jakeb/CLionProjects/finalproduct/cmake-build-debug/CMakeFiles/rebuild_cache.dir

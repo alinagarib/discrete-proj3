@@ -1,13 +1,17 @@
 # ninja log v5
 46	1328	7355247438437526	CMakeFiles/discrete_proj3.dir/RedBlackTree.cpp.obj	d04c6e2528de2fdb
 2	354	7355261242232317	CMakeFiles/discrete_proj3.dir/HashMap.cpp.obj	6bea6df67a4c895c
-5	1516	7355298182611678	CMakeFiles/discrete_proj3.dir/Quotes.cpp.obj	e7e09537a016b42e
-3	420	7355294879199401	CMakeFiles/discrete_proj3.dir/main.cpp.obj	6952c75865e8ef7a
-1516	2014	7355298187580233	discrete_proj3.exe	f5ff1b4ef51c26ec
-2	817	7355289285734520	CMakeFiles/discrete_proj3.dir/Game.cpp.obj	3cfa17ca94d921b
-8	1190	7355242145399221	build.ninja	7adbbf4bf46291d
-12	812	7355351741932220	CMakeFiles/discrete_proj3.dir/main.cpp.obj	6952c75865e8ef7a
 4	1439	7355351748163948	CMakeFiles/discrete_proj3.dir/Quotes.cpp.obj	e7e09537a016b42e
-1439	1971	7355351753434530	discrete_proj3.exe	f5ff1b4ef51c26ec
 3	830	7355352001331776	CMakeFiles/discrete_proj3.dir/main.cpp.obj	6952c75865e8ef7a
 831	1369	7355352006642348	discrete_proj3.exe	f5ff1b4ef51c26ec
+2	817	7355289285734520	CMakeFiles/discrete_proj3.dir/Game.cpp.obj	3cfa17ca94d921b
+8	1190	7355355782136735	build.ninja	7adbbf4bf46291d
+27	1135	7355356747159167	CMakeFiles/discrete_proj3.dir/RedBlackTree.cpp.obj	99f8385c00d2692a
+17	1283	7355356748578929	CMakeFiles/discrete_proj3.dir/HashMap.cpp.obj	7bbeef9f73999da
+3	1519	7355356750977814	CMakeFiles/discrete_proj3.dir/main.cpp.obj	bdb9e045fe93ad21
+33	1909	7355356754841294	CMakeFiles/discrete_proj3.dir/Game.cpp.obj	47e3e01f4bef65e
+10	2067	7355356756409641	CMakeFiles/discrete_proj3.dir/Quotes.cpp.obj	bfe1e1e4cc498a11
+2067	2399	7355356759771993	discrete_proj3.exe	97a5d1e419ea4076
+8	499	7355430299025824	CMakeFiles/discrete_proj3.dir/HashMap.cpp.obj	7bbeef9f73999da
+3	958	7355430303610675	CMakeFiles/discrete_proj3.dir/Quotes.cpp.obj	bfe1e1e4cc498a11
+958	1221	7355430306213053	discrete_proj3.exe	97a5d1e419ea4076
