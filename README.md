@@ -5,16 +5,16 @@ Wheel of Quotes is a command-line game inspired by the classic "Wheel of Fortune
 We utilized the Quotes 500K Dataset from Kaggle. The raw data has been processed into smaller, easily parsable .txt files, located in the cmake-build-debug directory of the project.
 
 ## Features
-Game Modes: We sorted the data into the top ten categories in the dataset, and allowed players to choose a genre for their randomized quote. 
-Play the Game: Test your knowledge and guessing skills with famous quotes.
-Comparative Algorithms: View and compare the performance of different algorithms used in the game.
+- Game Modes: We sorted the data into the top ten categories in the dataset, and allowed players to choose a genre for their randomized quote. 
+- Play the Game: Test your knowledge and guessing skills with famous quotes.
+- Comparative Algorithms: View and compare the performance of different algorithms used in the game.
 ### Gameplay Mechanics:
-10 Attempts: You have 10 tries to guess unique consonants in the hidden quote.
-Vowel Penalty: Guessing a vowel counts as 2 attempts due to their frequency.
-Guess the Quote: Input ! at any time to guess the entire quote.
-Correct guess: You win!
-Incorrect guess: You lose.
-User-Friendly Interface: Simple menu-driven CLI for easy navigation.
+- 10 Attempts: You have 10 tries to guess unique consonants in the hidden quote.
+- Vowel Penalty: Guessing a vowel counts as 2 attempts due to their frequency.
+- Guess the Quote: Input ! at any time to guess the entire quote.
+- Correct guess: You win!
+- Incorrect guess: You lose.
+- User-Friendly Interface: Simple menu-driven CLI for easy navigation.
 
 ## How to Play
 Playing the Game:
@@ -45,7 +45,7 @@ Run the Game:
 No additional files or downloads are required.
 
 ## Dependencies
-Programming Language: The game is written in C++.
-Compiler: Ensure you have a C++11 compatible compiler installed (e.g., GCC, Clang, MSVC).
+- Programming Language: The game is written in C++.
+- Compiler: Ensure you have a C++11 compatible compiler installed (e.g., GCC, Clang, MSVC).
 
 Thank you! :p
