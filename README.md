@@ -1,24 +1,51 @@
-# discrete-proj3
+# Wheel of Quotes
+Wheel of Quotes is a command-line game inspired by the classic "Wheel of Fortune." Players are challenged to guess letters in famous quotes, aiming to solve the complete quote before running out of attempts.
 
-# WHEEL OF QUOTES
+## Dataset
+We utilized the Quotes 500K Dataset from Kaggle. The raw data has been processed into smaller, easily parsable .txt files, located in the cmake-build-debug directory of the project.
 
-Data set: https://www.kaggle.com/datasets/manann/quotes-500k?resource=download
+## Features
+Game Modes: We sorted the data into the top ten categories in the dataset, and allowed players to choose a genre for their randomized quote. 
+Play the Game: Test your knowledge and guessing skills with famous quotes.
+Comparative Algorithms: View and compare the performance of different algorithms used in the game.
+### Gameplay Mechanics:
+10 Attempts: You have 10 tries to guess unique consonants in the hidden quote.
+Vowel Penalty: Guessing a vowel counts as 2 attempts due to their frequency.
+Guess the Quote: Input ! at any time to guess the entire quote.
+Correct guess: You win!
+Incorrect guess: You lose.
+User-Friendly Interface: Simple menu-driven CLI for easy navigation.
 
-Our project, Wheel of Quotes, is based on the data set linked above. 
-We took the raw data and put it into smaller, easily parsable .txt files, found 
-in our cmake-build-debug (quotes.txt and quotes_3.txt).
+## How to Play
+Playing the Game:
+- You'll see a quote with missing characters.
+- Enter letters to guess the missing characters.
+- Consonants deduct 1 attempt.
+- Vowels deduct 2 attempts.
+- You have a total of 10 attempts.
+- To guess the entire quote, input !.
+- If correct, you win.
+- If incorrect, the game ends.
+- After the game concludes:
+  - Input 1: Restart the game.
+  - Input 2: Return to the main menu.
 
-For the functionality of the game, the user is prompted to choose from the menu of options.
-To see our comparative algorithms at work, input 1. To play the game itself, input 2. To quit,
-input 3.
+## Installation and Setup
+Running the game is straightforward. Follow these steps:
+- Clone the Repository
+- Cmkae build
 
-To play the game itself, you are allowed 10 attempts to guess unique letters withing a quote that has 
-missing characters, in the same fashion of Wheel of Fortune. Vowels count as 2 attempts. You may input
-"!" to guess the final quote, in which case you will either win or lose. You may then input 1 to restart
-or 2 to quit.
+Using an IDE:
+- Open the project in your preferred IDE.
+- Build the project using the IDE's build tools.
+  
+Run the Game:
+- Execute the compiled binary.
 
-Finally, running the code yourself is quite easy. Simply clone the main branch on this github,
-and it should run after you build it with no added files or downloads. There is no extraneous code or front end besides the CLI. 
+No additional files or downloads are required.
 
-Thank you and have a
-wonderful day.
+## Dependencies
+Programming Language: The game is written in C++.
+Compiler: Ensure you have a C++11 compatible compiler installed (e.g., GCC, Clang, MSVC).
+
+Thank you! :p
